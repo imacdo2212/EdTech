@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sk_code", "ts", "payload", "scope"],
+  "properties": {
+    "sk_code": { "type": "string", "maxLength": 8 },
+    "ts": { "type": "string" },
+    "scope": { "type": "string", "enum": ["profile", "session"] },
+    "payload": { "type": "object", "additionalProperties": true }
+  }
+}

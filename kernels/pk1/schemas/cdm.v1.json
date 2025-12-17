@@ -1,0 +1,104 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["pk_version", "learner_id", "consent"],
+  "properties": {
+    "pk_version": { "type": "string" },
+    "learner_id": { "type": "string" },
+    "consent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "scopes", "timestamp"],
+      "properties": {
+        "status": { "type": "string", "enum": ["granted", "revoked", "limited"] },
+        "scopes": { "type": "array", "items": { "type": "string" }, "maxItems": 16 },
+        "timestamp": { "type": "string" }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "display_name": { "type": "string", "maxLength": 80 },
+        "locale": { "type": "string", "maxLength": 16 },
+        "timezone": { "type": "string", "maxLength": 64 },
+        "education_level": { "type": "string", "maxLength": 16 }
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "style": { "type": "string", "enum": ["brief", "detailed"] },
+        "tone": { "type": "string", "maxLength": 16 },
+        "accessibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "dyslexia_mode": { "type": "boolean" },
+            "font_scale": { "type": "number" }
+          }
+        },
+        "slang_mode": { "type": "string", "enum": ["none", "mild", "regional"] }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "languages": { "type": "array", "items": { "type": "string" }, "maxItems": 32 },
+        "instruments": { "type": "array", "items": { "type": "string" }, "maxItems": 16 },
+        "sports": { "type": "array", "items": { "type": "string" }, "maxItems": 16 },
+        "tech_stack": { "type": "array", "items": { "type": "string" }, "maxItems": 32 }
+      }
+    },
+    "supports": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sen": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "has_plan": { "type": "boolean" },
+            "notes": { "type": "string", "maxLength": 500 }
+          }
+        },
+        "wellbeing": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": { "check_ins_enabled": { "type": "boolean" } }
+        }
+      }
+    },
+    "curriculum": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "subjects": {
+          "type": "array",
+          "maxItems": 24,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "code": { "type": "string", "maxLength": 8 },
+              "level": { "type": "string", "maxLength": 16 },
+              "targets": { "type": "array", "items": { "type": "string" }, "maxItems": 8 },
+              "exam_board": { "type": "string", "maxLength": 32 }
+            }
+          }
+        }
+      }
+    },
+    "topic_states": { "type": "object", "additionalProperties": true },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "created_at": { "type": "string" },
+        "updated_at": { "type": "string" }
+      }
+    }
+  }
+}
